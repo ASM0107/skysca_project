@@ -1,0 +1,105 @@
+{% extends 'caCode/base.html' %}
+{% load static %}
+{% block title %}Sky's CA Dashboard{% endblock %}
+
+{% block content %}
+<div class="container fade-in">
+  
+  <div class="grid-cols-2" style="gap: 3rem; grid-template-columns: 1fr 2fr;">
+    <!-- Actions Sidebar -->
+    <div>
+      <div class="glass-card mb-4" style="padding: 2rem;">
+        <h2 style="color: var(--accent-primary); font-size: 1.5rem; margin-bottom: 1.5rem;">Request Certificate</h2>
+
+        <!-- Upload CSR -->
+        <form method="post" action="{% url 'generate_csr' %}" class="mb-4">
+          {% csrf_token %}
+          <label for="csr-upload" class="form-label">Upload CSR (PEM format)</label>
+          <textarea id="csr-upload" name="csr" class="form-control mb-3" rows="5" placeholder="-----BEGIN CERTIFICATE REQUEST-----..." required></textarea>
+
+          <button type="submit" class="btn btn-primary btn-block">Submit CSR</button>
+        </form>
+
+        <div style="text-align: center; color: var(--text-muted); font-weight: 500; margin: 1.5rem 0;">OR</div>
+
+        <!-- Generate Key -->
+        <div class="mb-4">
+          <label class="form-label">Generate New Key</label>
+          <button type="button" class="btn btn-outline btn-block">Generate Key Pair</button>
+        </div>
+
+        <!-- Request Button -->
+        <div>
+          <button type="button" class="btn btn-primary btn-block">Request Certificate</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content / Certificates -->
+    <div>
+      <div class="glass-card">
+        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem;">View All Certificates</h2>
+        
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Domain</th>
+                <th>Issued On</th>
+                <th>Expires</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for cert in certificates %}
+              <tr>
+                <td style="font-weight: 500; color: #fff;">{{ cert.domain }}</td>
+                <td>{% if cert.status == 'issued' %}{{ cert.created_at|date:'Y-m-d' }}{% else %}-{% endif %}</td>
+                <td>{% if cert.status == 'issued' %}{{ cert.created_at|date:'Y-m-d' }}{% else %}-{% endif %}</td>
+                <td>
+                  {% if cert.status == 'issued' %}
+                    <span class="badge badge-success">{{ cert.get_status_display }}</span>
+                  {% elif cert.status == 'pending' %}
+                    <span class="badge badge-warning">{{ cert.get_status_display }}</span>
+                  {% else %}
+                    <span class="badge" style="background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border);">{{ cert.get_status_display }}</span>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if cert.status == 'issued' %}
+                    <a href="{% if cert.certificate %}{{ cert.certificate.url }}{% else %}#{% endif %}" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem; margin-right: 0.5rem;" {% if cert.certificate %}download{% endif %}>Download CRT</a>
+                    <form method="post" action="{% url 'revoke-certificate' cert.id %}" style="display:inline;" onsubmit="return confirm('Are you sure you want to revoke this certificate?');">
+                      {% csrf_token %}
+                      <select name="revocation_reason" class="form-control" style="display:inline-block; width:auto; padding:0.3rem; margin-right: 0.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); color: #fff; font-size: 0.85rem;">
+                        <option value="unspecified">Unspecified</option>
+                        <option value="key_compromise">Key Compromise</option>
+                        <option value="ca_compromise">CA Compromise</option>
+                        <option value="affiliation_changed">Affiliation Changed</option>
+                        <option value="superseded">Superseded</option>
+                        <option value="cessation_of_operation">Cessation Of Operation</option>
+                        <option value="privilege_withdrawn">Privilege Withdrawn</option>
+                      </select>
+                      <button type="submit" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem; border-color: #ff4444; color: #ff4444;">Revoke</button>
+                    </form>
+                  {% elif cert.verified and cert.status != 'issued' %}
+                    <form method="post" action="{% url 'issue_certificate' cert.id %}" style="display:inline;">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">Issue</button>
+                    </form>
+                  {% else %}
+                    <span style="color: var(--text-muted); font-size: 0.85rem;">Not issued</span>
+                  {% endif %}
+                </td>
+              </tr>
+              {% empty %}
+              <tr><td colspan="5" style="text-align:center; color: var(--text-muted); padding: 2rem;">No certificates found.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

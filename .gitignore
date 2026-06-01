@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.sqlite3
+
+# Django
+*.log
+staticfiles/
+media/
+
+# Cryptographic Keys (VITAL)
+# The CA Root folder must never be committed to GitHub.
+# It will be mounted as a persistent volume in Railway.
+ca_root/
+
+# Environment variables
+.env
+.venv
+env/
+venv/

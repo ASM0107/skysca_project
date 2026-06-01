@@ -1,0 +1,108 @@
+{% extends 'caCode/base.html' %}
+{% load static %}
+{% block title %}Certificate Revocation | Sky's CA{% endblock %}
+
+{% block content %}
+<style>
+  .radio-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+  }
+  .radio-custom input {
+    display: none;
+  }
+  .radio-custom input:checked + span {
+    background: #ef4444; /* red */
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .btn-danger {
+    background: #ef4444;
+    color: white;
+  }
+  .btn-danger:hover {
+    background: #dc2626;
+  }
+</style>
+
+<div class="container fade-in">
+  <div style="max-width: 800px; margin: 0 auto;">
+    <h1 class="text-center" style="font-size: 2.5rem; margin-bottom: 0.5rem;">Certificate Revocation</h1>
+    <p class="text-center" style="color: var(--text-muted); margin-bottom: 3rem;">
+      Revoke SSL certificates that are no longer in use or may have been compromised.
+    </p>
+
+    <div class="glass-card" style="padding: 3rem; margin-bottom: 3rem;">
+      <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 2.5rem;">
+        <h4 style="color: #ef4444; margin: 0 0 0.5rem 0; font-size: 1.2rem;">⚠️ Warning: Irreversible Action</h4>
+        <p style="margin: 0; color: #fca5a5; line-height: 1.5;">Certificate revocation is permanent and cannot be undone. The certificate will immediately become invalid and must be replaced if still needed.</p>
+      </div>
+
+      <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text-primary);">Select Certificate to Revoke</h3>
+      
+      <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+        <div style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--glass-border); display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1.5rem;">
+          <label class="radio-custom">
+            <input type="radio" name="certificate" value="1">
+            <span></span>
+          </label>
+          <div>
+            <h4 style="margin: 0 0 0.25rem 0; font-size: 1.1rem; color: var(--text-primary);">example.com</h4>
+            <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">DV SSL Certificate • Valid until Oct 23, 2025</p>
+          </div>
+          <div style="color: var(--accent-primary); font-weight: 500;">Active</div>
+        </div>
+
+        <div style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--glass-border); display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1.5rem;">
+          <label class="radio-custom">
+            <input type="radio" name="certificate" value="2">
+            <span></span>
+          </label>
+          <div>
+            <h4 style="margin: 0 0 0.25rem 0; font-size: 1.1rem; color: var(--text-primary);">blog.example.com</h4>
+            <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">DV SSL Certificate • Valid until Dec 15, 2025</p>
+          </div>
+          <div style="color: var(--accent-primary); font-weight: 500;">Active</div>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 1.5rem;">
+        <label for="reason" class="form-label">Reason for Revocation</label>
+        <select id="reason" class="form-control" required style="cursor: pointer;">
+          <option value="">Select a reason...</option>
+          <option value="compromised">Private Key Compromised</option>
+          <option value="replaced">Certificate Being Replaced</option>
+          <option value="ceased">Operation Ceased</option>
+          <option value="superseded">Superseded</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 2rem;">
+        <label for="details" class="form-label">Additional Details</label>
+        <textarea id="details" class="form-control" placeholder="Please provide any additional information about the revocation..." rows="4" style="resize: vertical;"></textarea>
+      </div>
+
+      <div style="display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 2.5rem;">
+        <input type="checkbox" id="confirm" required style="margin-top: 0.25rem; width: 1.2rem; height: 1.2rem; cursor: pointer;">
+        <label for="confirm" style="color: #fca5a5; line-height: 1.5; cursor: pointer;">
+          I understand that revoking this certificate will immediately invalidate it and this action cannot be undone.
+        </label>
+      </div>
+
+      <button class="btn btn-danger btn-block" style="font-size: 1.1rem; padding: 1rem;">Revoke Certificate</button>
+    </div>
+  </div>
+</div>
+{% endblock %}

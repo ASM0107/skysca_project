@@ -1,0 +1,55 @@
+{% extends 'caCode/base.html' %}
+{% load static %}
+{% block title %}About Us | Sky's CA{% endblock %}
+
+{% block content %}
+<div class="container fade-in">
+  <div class="glass-card" style="padding: 4rem 2rem; max-width: 900px; margin: 0 auto;">
+    <h1 class="text-center" style="font-size: 3rem; margin-bottom: 1rem;">Securing India's <span class="text-gradient">Digital Future</span></h1>
+    <p class="text-center" style="color: var(--text-muted); font-size: 1.2rem; margin-bottom: 4rem;">
+      Sky's CA is India's trusted SSL certificate provider, making web security accessible to everyone.
+    </p>
+
+    <div class="grid-cols-3" style="gap: 2rem; margin-bottom: 4rem;">
+      <div class="glass-card text-center" style="border-color: var(--accent-primary); box-shadow: 0 0 15px rgba(0, 255, 136, 0.05);">
+        <div style="font-size: 3rem; font-weight: 700; color: var(--accent-primary); font-family: var(--font-heading);">2M+</div>
+        <div style="color: var(--text-muted); font-weight: 500;">Websites Protected</div>
+      </div>
+      <div class="glass-card text-center">
+        <div style="font-size: 3rem; font-weight: 700; color: var(--accent-primary); font-family: var(--font-heading);">99.9%</div>
+        <div style="color: var(--text-muted); font-weight: 500;">Uptime</div>
+      </div>
+      <div class="glass-card text-center">
+        <div style="font-size: 3rem; font-weight: 700; color: var(--accent-primary); font-family: var(--font-heading);">24/7</div>
+        <div style="color: var(--text-muted); font-weight: 500;">Support</div>
+      </div>
+    </div>
+
+    <h2 class="text-center" style="font-size: 2.2rem; margin-bottom: 2rem;">Our Values</h2>
+    <div class="grid-cols-2" style="gap: 2rem; margin-bottom: 4rem;">
+      <div class="glass-card">
+        <h3 style="color: var(--accent-primary); margin-bottom: 1rem; font-size: 1.3rem;">Trust & Security</h3>
+        <p style="color: var(--text-muted); line-height: 1.6;">We believe in providing the highest level of security and maintaining trust through transparency and reliability.</p>
+      </div>
+      <div class="glass-card">
+        <h3 style="color: var(--accent-primary); margin-bottom: 1rem; font-size: 1.3rem;">Accessibility</h3>
+        <p style="color: var(--text-muted); line-height: 1.6;">Making web security accessible to everyone, from small businesses to large enterprises.</p>
+      </div>
+      <div class="glass-card">
+        <h3 style="color: var(--accent-primary); margin-bottom: 1rem; font-size: 1.3rem;">Innovation</h3>
+        <p style="color: var(--text-muted); line-height: 1.6;">Continuously improving our services to stay ahead of evolving security challenges.</p>
+      </div>
+      <div class="glass-card">
+        <h3 style="color: var(--accent-primary); margin-bottom: 1rem; font-size: 1.3rem;">Help Ready</h3>
+        <p style="color: var(--text-muted); line-height: 1.6;">Always ready to help incase of any troubles, with an expert support team ready 24/7.</p>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <h2 style="font-size: 2rem; margin-bottom: 1rem;">Ready to secure your website?</h2>
+      <p style="color: var(--text-muted); margin-bottom: 2rem;">Join thousands of businesses who trust Sky's CA</p>
+      <a href="{% url 'certificates' %}" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1.1rem;">View Our Plans</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

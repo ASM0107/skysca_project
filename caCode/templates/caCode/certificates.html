@@ -1,0 +1,123 @@
+{% extends 'caCode/base.html' %}
+{% load static %}
+{% block title %}SSL Certificates | Sky's CA{% endblock %}
+
+{% block content %}
+<div class="container fade-in">
+  <!-- Hero Section -->
+  <section class="grid-cols-2" style="align-items: center; gap: 4rem; margin-bottom: 3rem;">
+    <div style="text-align: center;">
+      <img src="{% static 'img/logo.png' %}" alt="Sky's CA Logo" style="width: 300px; max-width: 100%;">
+    </div>
+    <div>
+      <span class="badge badge-success mb-3">Find the Right Plan</span>
+      <h1 style="font-size: 3rem; margin-bottom: 1.5rem;">SSL Certificate <span class="text-gradient">Plans</span></h1>
+      <p style="font-size: 1.15rem; color: var(--text-muted);">Choose the level of trust, authentication, and assurance you need for your web properties.</p>
+    </div>
+  </section>
+
+  <!-- Pricing Cards -->
+  <div class="grid-cols-3" style="gap: 2rem;">
+    <!-- Free DV -->
+    <div class="glass-card text-center" style="padding: 2.5rem 2rem;">
+      <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Free Domain Validation (DV)</h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; height: 3rem;">Basic encryption for personal and small projects. Issued instantly.</p>
+      <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-primary); margin-bottom: 1.5rem;">₹0 <span style="font-size: 1rem; color: var(--text-muted); font-weight: 400;">/ year</span></div>
+      
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 2rem;">
+        <span class="badge" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);">Auto Renewal</span>
+        <span class="badge" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);">Browser Trusted</span>
+        <span class="badge" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);">HTTPS Padlock</span>
+      </div>
+      
+      <button class="btn btn-primary btn-block">Get Free DV</button>
+    </div>
+
+    <!-- Business OV -->
+    <div class="glass-card text-center" style="padding: 2.5rem 2rem; border-color: var(--accent-primary); box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);">
+      <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Business Organization Validation (OV)</h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; height: 3rem;">Strong encryption + brand identity with business verification.</p>
+      <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-primary); margin-bottom: 1.5rem;">₹499 <span style="font-size: 1rem; color: var(--text-muted); font-weight: 400;">/ year</span></div>
+      
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 2rem;">
+        <span class="badge" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);">Business Verified</span>
+        <span class="badge" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);">Warranty</span>
+        <span class="badge" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);">Faster Support</span>
+      </div>
+      
+      <button class="btn btn-outline btn-block">Buy OV</button>
+    </div>
+
+    <!-- Premium EV -->
+    <div class="glass-card text-center" style="padding: 2.5rem 2rem;">
+      <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Premium Extended Validation (EV)</h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; height: 3rem;">Maximum security and trust for banks, fintech, and eCommerce.</p>
+      <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-primary); margin-bottom: 1.5rem;">₹1499 <span style="font-size: 1rem; color: var(--text-muted); font-weight: 400;">/ year</span></div>
+      
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 2rem;">
+        <span class="badge" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);">Green Address Bar</span>
+        <span class="badge" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);">Company Documented</span>
+        <span class="badge" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);">Business Guarantee</span>
+      </div>
+      
+      <button class="btn btn-outline btn-block">Buy EV</button>
+    </div>
+  </div>
+
+  <!-- Comparison Table -->
+  <section class="glass-card mt-4" style="padding: 3rem;">
+    <h2 class="text-center" style="font-size: 2rem; margin-bottom: 2rem;">Compare Plans</h2>
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th style="text-align: center;">DV</th>
+            <th style="text-align: center;">OV</th>
+            <th style="text-align: center;">EV</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-weight: 500;">Encryption</td>
+            <td style="text-align: center; color: var(--text-muted);">✓ 256-bit</td>
+            <td style="text-align: center; color: var(--text-muted);">✓ 256-bit</td>
+            <td style="text-align: center; color: var(--text-muted);">✓ 256-bit</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 500;">Domain Validation</td>
+            <td style="text-align: center; color: var(--accent-primary);">✓</td>
+            <td style="text-align: center; color: var(--accent-primary);">✓</td>
+            <td style="text-align: center; color: var(--accent-primary);">✓</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 500;">Organization Validation</td>
+            <td style="text-align: center; color: #fca5a5;">✗</td>
+            <td style="text-align: center; color: var(--accent-primary);">✓</td>
+            <td style="text-align: center; color: var(--accent-primary);">✓</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 500;">Green Bar Address</td>
+            <td style="text-align: center; color: #fca5a5;">✗</td>
+            <td style="text-align: center; color: #fca5a5;">✗</td>
+            <td style="text-align: center; color: var(--accent-primary);">✓</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 500;">Setup Time</td>
+            <td style="text-align: center; color: var(--text-muted);">Instant</td>
+            <td style="text-align: center; color: var(--text-muted);">1–2 Days</td>
+            <td style="text-align: center; color: var(--text-muted);">3–5 Days</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="text-center mt-4 glass-card" style="padding: 4rem 2rem;">
+    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Ready to choose a certificate?</h2>
+    <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2.5rem;">Join 2M+ websites already protected by Sky's CA.</p>
+    <a href="{% url 'certificate_generator' %}" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1.1rem;">Start for Free</a>
+  </section>
+</div>
+{% endblock %}

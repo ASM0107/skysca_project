@@ -1,0 +1,122 @@
+{% extends 'caCode/base.html' %}
+{% load static %}
+{% block title %}Installation Guides | Sky's CA{% endblock %}
+
+{% block content %}
+<div class="container fade-in">
+  <h1 class="text-center" style="font-size: 2.8rem; margin-bottom: 1rem;">SSL Certificate <span class="text-gradient">Installation Guides</span></h1>
+  <p class="text-center" style="color: var(--text-muted); max-width: 600px; margin: 0 auto 3rem; font-size: 1.1rem;">
+    Step-by-step instructions for installing SSL certificates on various platforms and web servers.
+  </p>
+
+  <div style="max-width: 600px; margin: 0 auto 4rem;">
+    <input type="text" class="form-control" placeholder="Search for your platform or web server..." style="padding: 1rem 1.5rem; font-size: 1.1rem; border-radius: 0.5rem;">
+  </div>
+
+  <div class="grid-cols-3" style="gap: 2rem;">
+    
+    <!-- Apache -->
+    <div class="glass-card" style="padding: 2.5rem 2rem;">
+      <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--accent-primary);">Apache Web Server</h3>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Install SSL certificate on Apache HTTP Server</p>
+      
+      <div style="background: rgba(0,0,0,0.2); padding: 1.25rem; border-radius: 0.75rem; border: 1px solid var(--glass-border); margin-bottom: 2rem;">
+        <ol style="margin: 0; padding-left: 1.2rem; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8;">
+          <li>Generate CSR</li>
+          <li>Install Certificate</li>
+          <li>Configure Virtual Host</li>
+          <li>Test Installation</li>
+        </ol>
+      </div>
+      <a href="#" class="btn btn-outline btn-block" style="text-align: center;">View Guide</a>
+    </div>
+
+    <!-- Nginx -->
+    <div class="glass-card" style="padding: 2.5rem 2rem;">
+      <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--accent-primary);">Nginx</h3>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Install SSL certificate on Nginx web server</p>
+      
+      <div style="background: rgba(0,0,0,0.2); padding: 1.25rem; border-radius: 0.75rem; border: 1px solid var(--glass-border); margin-bottom: 2rem;">
+        <ol style="margin: 0; padding-left: 1.2rem; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8;">
+          <li>Generate Private Key</li>
+          <li>Create CSR</li>
+          <li>Configure SSL</li>
+          <li>Restart Nginx</li>
+        </ol>
+      </div>
+      <a href="#" class="btn btn-outline btn-block" style="text-align: center;">View Guide</a>
+    </div>
+
+    <!-- IIS -->
+    <div class="glass-card" style="padding: 2.5rem 2rem;">
+      <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--accent-primary);">Microsoft IIS</h3>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Install SSL certificate on IIS server</p>
+      
+      <div style="background: rgba(0,0,0,0.2); padding: 1.25rem; border-radius: 0.75rem; border: 1px solid var(--glass-border); margin-bottom: 2rem;">
+        <ol style="margin: 0; padding-left: 1.2rem; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8;">
+          <li>Import Certificate</li>
+          <li>Bind Certificate</li>
+          <li>Configure Site</li>
+          <li>Test HTTPS</li>
+        </ol>
+      </div>
+      <a href="#" class="btn btn-outline btn-block" style="text-align: center;">View Guide</a>
+    </div>
+
+    <!-- cPanel -->
+    <div class="glass-card" style="padding: 2.5rem 2rem;">
+      <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--accent-primary);">cPanel</h3>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Install SSL certificate using cPanel</p>
+      
+      <div style="background: rgba(0,0,0,0.2); padding: 1.25rem; border-radius: 0.75rem; border: 1px solid var(--glass-border); margin-bottom: 2rem;">
+        <ol style="margin: 0; padding-left: 1.2rem; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8;">
+          <li>Access SSL/TLS</li>
+          <li>Install Certificate</li>
+          <li>Configure Domain</li>
+          <li>Verify Installation</li>
+        </ol>
+      </div>
+      <a href="#" class="btn btn-outline btn-block" style="text-align: center;">View Guide</a>
+    </div>
+
+    <!-- Plesk -->
+    <div class="glass-card" style="padding: 2.5rem 2rem;">
+      <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--accent-primary);">Plesk</h3>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Install SSL certificate on Plesk panel</p>
+      
+      <div style="background: rgba(0,0,0,0.2); padding: 1.25rem; border-radius: 0.75rem; border: 1px solid var(--glass-border); margin-bottom: 2rem;">
+        <ol style="margin: 0; padding-left: 1.2rem; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8;">
+          <li>Access SSL Certificates</li>
+          <li>Upload Certificate</li>
+          <li>Assign to Domain</li>
+          <li>Verify Setup</li>
+        </ol>
+      </div>
+      <a href="#" class="btn btn-outline btn-block" style="text-align: center;">View Guide</a>
+    </div>
+
+    <!-- Cloud Platforms -->
+    <div class="glass-card" style="padding: 2.5rem 2rem;">
+      <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--accent-primary);">Cloud Platforms</h3>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Install on AWS, Google Cloud, or Azure</p>
+      
+      <div style="background: rgba(0,0,0,0.2); padding: 1.25rem; border-radius: 0.75rem; border: 1px solid var(--glass-border); margin-bottom: 2rem;">
+        <ol style="margin: 0; padding-left: 1.2rem; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8;">
+          <li>Upload Certificate</li>
+          <li>Configure Load Balancer</li>
+          <li>Update DNS</li>
+          <li>Test Configuration</li>
+        </ol>
+      </div>
+      <a href="#" class="btn btn-outline btn-block" style="text-align: center;">View Guide</a>
+    </div>
+
+  </div>
+
+  <div class="text-center glass-card" style="margin-top: 4rem; padding: 3rem;">
+    <h2 style="font-size: 2rem; margin-bottom: 1rem;">Need Help?</h2>
+    <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem;">Our support team is available 24/7 to assist you with installation</p>
+    <a href="#" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1.1rem;">Contact Support</a>
+  </div>
+</div>
+{% endblock %}

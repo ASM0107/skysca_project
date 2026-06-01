@@ -1,0 +1,55 @@
+{% extends 'caCode/base.html' %}
+{% load static %}
+{% block title %}DNS Verification | Sky's CA{% endblock %}
+
+{% block content %}
+<div class="container fade-in">
+  <div class="glass-card" style="max-width: 900px; margin: 2rem auto; padding: 3rem;">
+    <h1 class="text-center" style="font-size: 2.5rem; margin-bottom: 1rem;">DNS Verification</h1>
+    <p class="text-center" style="color: var(--text-muted); margin-bottom: 3rem;">To verify your domain, please add the following DNS TXT record and click 'Verify'.</p>
+
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Domain</th>
+            <th>DNS TXT Name</th>
+            <th>DNS TXT Value</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cert in certificates %}
+          <tr>
+            <td style="font-weight: 500; color: #fff;">{{ cert.domain }}</td>
+            <td style="color: #cbd5e1; font-family: monospace;">{{ cert.dns_txt_name }}</td>
+            <td>
+              <div style="background: rgba(0,0,0,0.2); padding: 0.5rem; border-radius: 0.25rem; font-family: monospace; font-size: 0.85rem; word-break: break-all;">
+                {{ cert.dns_token }}
+              </div>
+            </td>
+            <td>
+              {% if cert.verified %}
+                <span class="badge badge-success">Verified</span>
+              {% else %}
+                <span class="badge badge-warning">Unverified</span>
+              {% endif %}
+            </td>
+            <td>
+              {% if not cert.verified %}
+              <form method="post" action="{% url 'verify_dns' cert.id %}">{% csrf_token %}
+                <button type="submit" class="btn btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">Verify</button>
+              </form>
+              {% endif %}
+            </td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="5" style="text-align:center; color: var(--text-muted); padding: 2rem;">No pending verifications.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

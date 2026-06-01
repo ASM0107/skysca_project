@@ -1,0 +1,251 @@
+{% extends 'caCode/base.html' %}
+{% load static %}
+{% block title %}Certificate Generator | Sky's CA{% endblock %}
+
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+/* Dropdown container background */
+.select2-container--default .select2-results {
+    background-color: var(--input-bg) !important;
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+}
+
+/* Dropdown options */
+.select2-container--default .select2-results__option {
+    color: white !important;
+    padding: 8px 12px;
+    font-size: 14px;
+    background-color: transparent !important;
+}
+
+/* Highlight (hover/selected) */
+.select2-container--default .select2-results__option--highlighted {
+    background-color: var(--accent-primary) !important;
+    color: black !important;
+}
+
+/* Selected value box */
+.select2-container--default .select2-selection--single {
+    background-color: var(--input-bg) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 6px !important;
+    color: white !important;
+    display: flex;
+    height: 48px;
+}
+
+/* Selected text */
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: white !important;
+    line-height: 48px !important;
+    padding-left: 1rem !important;
+}
+
+/* Dropdown arrow */
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 10px !important;
+}
+</style>
+
+<div class="container fade-in">
+  <h1 class="text-center" style="font-size: 2.5rem; margin-bottom: 1rem;">SSL Certificate Generator</h1>
+  <p class="text-center" style="color: var(--text-muted); max-width: 600px; margin: 0 auto 3rem;">
+    Fill out the form to generate your CSR (Certificate Signing Request). The private key will be generated securely in your browser and will never touch our servers.
+  </p>
+
+  <div class="glass-card" style="max-width: 800px; margin: 0 auto;">
+    <form id="csrForm">
+      {% csrf_token %}
+
+      <div class="grid-cols-2" style="gap: 1.5rem; margin-bottom: 1.5rem;">
+        <div>
+          <label for="commonName" class="form-label">Common Name (Domain)</label>
+          <input type="text" name="commonName" class="form-control" placeholder="example.com" required>
+        </div>
+        <div>
+          <label for="email" class="form-label">Email Address (optional)</label>
+          <input type="email" name="email" class="form-control" placeholder="admin@example.com">
+        </div>
+      </div>
+
+      <div class="grid-cols-2" style="gap: 1.5rem; margin-bottom: 1.5rem;">
+        <div>
+          <label for="organization" class="form-label">Organization (O)</label>
+          <input type="text" name="organization" class="form-control" placeholder="Your Company Ltd.">
+        </div>
+        <div>
+          <label for="orgUnit" class="form-label">Organizational Unit (OU)</label>
+          <input type="text" name="orgUnit" class="form-control" placeholder="IT Department">
+        </div>
+      </div>
+
+      <div class="grid-cols-2" style="gap: 1.5rem; margin-bottom: 1.5rem;">
+        <div>
+          <label for="city" class="form-label">Locality (L)</label>
+          <input type="text" name="city" class="form-control" placeholder="Haldwani">
+        </div>
+        <div>
+          <label for="state" class="form-label">State/Province (ST)</label>
+          <input type="text" name="state" class="form-control" placeholder="Uttarakhand">
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 1.5rem;">
+        <label for="country" class="form-label">Country (C)</label>
+        <select id="country" name="country" class="form-control" style="width: 100%;" required>
+          <option value="">Select a country</option>
+          <option value="AF">Afghanistan</option>
+          <option value="AL">Albania</option>
+          <option value="DZ">Algeria</option>
+          <option value="IN">India</option>
+          <option value="US">United States</option>
+          <option value="GB">United Kingdom</option>
+          <option value="CA">Canada</option>
+          <option value="AU">Australia</option>
+          <!-- Additional countries can be added here if needed, kept short for brevity, select2 allows typing -->
+        </select>
+      </div>
+
+      <div class="grid-cols-2" style="gap: 1.5rem; margin-bottom: 1.5rem;">
+        <div>
+          <label for="algorithm" class="form-label">Key Algorithm</label>
+          <select name="algorithm" class="form-control">
+            <option value="RSA">RSA</option>
+            <option value="EC">Elliptic Curve (EC)</option>
+          </select>
+        </div>
+        <div>
+          <label for="keySize" class="form-label">Key Size</label>
+          <select name="keySize" class="form-control">
+            <option value="2048">2048 bits (RSA Standard)</option>
+            <option value="4096">4096 bits (RSA High Security)</option>
+            <option value="256">EC P-256</option>
+            <option value="384">EC P-384</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 2rem;">
+        <label for="san" class="form-label">Subject Alternative Names (SANs)</label>
+        <input type="text" name="san" class="form-control" placeholder="www.example.com, api.example.com">
+        <small style="color: var(--text-muted); display: block; margin-top: 0.5rem;">Comma-separated list of additional domains.</small>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" style="font-size: 1.1rem; padding: 1rem;">Generate CSR & Private Key</button>
+    </form>
+    
+    <div style="text-align:center; margin-top:2rem;">
+      <a href="{% url 'domain_verification' %}" class="btn btn-outline">Proceed to Domain Verification →</a>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#country').select2({
+      placeholder: "Select a country",
+      allowClear: true
+    });
+  });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/forge/1.3.1/forge.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+document.getElementById('csrForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const btn = document.querySelector('button[type="submit"]');
+  const originalText = btn.innerText;
+  btn.innerText = 'Generating Keys locally (This may take a moment)...';
+  btn.disabled = true;
+  
+  const commonName = document.querySelector('input[name="commonName"]').value;
+  const org = document.querySelector('input[name="organization"]').value;
+  const orgUnit = document.querySelector('input[name="orgUnit"]').value;
+  const city = document.querySelector('input[name="city"]').value;
+  const state = document.querySelector('input[name="state"]').value;
+  const country = document.querySelector('select[name="country"]').value;
+  const email = document.querySelector('input[name="email"]').value;
+  const keySize = parseInt(document.querySelector('select[name="keySize"]').value);
+  const algorithm = document.querySelector('select[name="algorithm"]').value;
+  
+  if (algorithm !== "RSA") {
+      alert("Only RSA is currently supported for client-side generation in this version.");
+      btn.innerText = originalText;
+      btn.disabled = false;
+      return;
+  }
+  
+  setTimeout(() => {
+    try {
+        const keys = forge.pki.rsa.generateKeyPair(keySize);
+        const csr = forge.pki.createCertificationRequest();
+        csr.publicKey = keys.publicKey;
+        
+        const attrs = [
+            { name: 'commonName', value: commonName }
+        ];
+        if (country) attrs.push({ name: 'countryName', value: country });
+        if (state) attrs.push({ shortName: 'ST', value: state });
+        if (city) attrs.push({ name: 'localityName', value: city });
+        if (org) attrs.push({ name: 'organizationName', value: org });
+        if (orgUnit) attrs.push({ shortName: 'OU', value: orgUnit });
+        
+        csr.setSubject(attrs);
+        csr.sign(keys.privateKey, forge.md.sha256.create());
+        
+        const pemCsr = forge.pki.certificationRequestToPem(csr);
+        const pemKey = forge.pki.privateKeyToPem(keys.privateKey);
+        
+        const zip = new JSZip();
+        zip.file("certificate.csr", pemCsr);
+        zip.file("private.key", pemKey);
+        
+        zip.generateAsync({type:"blob"}).then(function(content) {
+            const url = window.URL.createObjectURL(content);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = commonName + '_csr_bundle.zip';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            
+            const formData = new FormData();
+            formData.append('csr', pemCsr);
+            formData.append('commonName', commonName);
+            
+            fetch("{% url 'generate_csr' %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
+                },
+                body: formData
+            }).then(res => res.json()).then(data => {
+                if (data.redirect) {
+                    window.location.href = data.redirect;
+                } else if (data.error) {
+                    alert(data.error);
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                }
+            }).catch(err => {
+                alert("Error saving CSR to server");
+                btn.innerText = originalText;
+                btn.disabled = false;
+            });
+        });
+    } catch(err) {
+        alert("Error generating keys: " + err.message);
+        btn.innerText = originalText;
+        btn.disabled = false;
+    }
+  }, 100);
+});
+</script>
+{% endblock %}

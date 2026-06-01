@@ -1,0 +1,84 @@
+{% extends 'caCode/base.html' %}
+{% load static %}
+{% block title %}Organization Validation | Sky's CA{% endblock %}
+
+{% block content %}
+<div class="container fade-in">
+  <div style="max-width: 800px; margin: 0 auto;">
+    <h1 class="text-center" style="font-size: 2.5rem; margin-bottom: 0.5rem;">Organization Validation</h1>
+    <p class="text-center" style="color: var(--text-muted); margin-bottom: 3rem;">
+      Verify your organization's identity to obtain OV or EV SSL certificates.
+    </p>
+
+    <div class="glass-card" style="padding: 3rem; margin-bottom: 3rem;">
+      
+      <!-- Progress Steps -->
+      <div style="display: flex; justify-content: space-between; margin-bottom: 3rem; position: relative;">
+        <!-- Line behind steps -->
+        <div style="position: absolute; top: 15px; left: 0; right: 0; height: 2px; background: rgba(255, 255, 255, 0.1); z-index: 1;"></div>
+        
+        <div style="position: relative; z-index: 2; text-align: center; background: var(--bg-dark); padding: 0 1rem;">
+          <div style="width: 32px; height: 32px; background: var(--accent-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; color: #000; font-weight: bold;">1</div>
+          <div style="font-size: 0.9rem; color: #fff;">Company Details</div>
+        </div>
+        
+        <div style="position: relative; z-index: 2; text-align: center; background: var(--bg-dark); padding: 0 1rem;">
+          <div style="width: 32px; height: 32px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; color: #fff;">2</div>
+          <div style="font-size: 0.9rem; color: var(--text-muted);">Documents</div>
+        </div>
+        
+        <div style="position: relative; z-index: 2; text-align: center; background: var(--bg-dark); padding: 0 1rem;">
+          <div style="width: 32px; height: 32px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; color: #fff;">3</div>
+          <div style="font-size: 0.9rem; color: var(--text-muted);">Verification</div>
+        </div>
+      </div>
+
+      <!-- Form Section -->
+      <div>
+        <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text-primary);">Company Information</h3>
+        
+        <div class="grid-cols-2" style="gap: 1.5rem; margin-bottom: 1.5rem;">
+          <div>
+            <label for="companyName" class="form-label">Legal Company Name</label>
+            <input type="text" id="companyName" class="form-control" required>
+          </div>
+          <div>
+            <label for="registrationNumber" class="form-label">Registration Number</label>
+            <input type="text" id="registrationNumber" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label for="address" class="form-label">Registered Address</label>
+          <textarea id="address" rows="3" class="form-control" required style="resize: vertical;"></textarea>
+        </div>
+
+        <div class="grid-cols-2" style="gap: 1.5rem; margin-bottom: 2rem;">
+          <div>
+            <label for="country" class="form-label">Country</label>
+            <select id="country" class="form-control" required>
+              <option value="IN">India</option>
+              <option value="US">United States</option>
+              <option value="GB">United Kingdom</option>
+            </select>
+          </div>
+          <div>
+            <label for="state" class="form-label">State/Province</label>
+            <input type="text" id="state" class="form-control" required>
+          </div>
+        </div>
+
+        <div style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 0.5rem; padding: 1rem; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">
+          💡 Tip: Ensure all details match your official registration documents exactly.
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; border-top: 1px solid var(--glass-border); padding-top: 2rem;">
+          <button class="btn btn-outline" style="opacity: 0.5; pointer-events: none;">Previous</button>
+          <button class="btn btn-primary">Continue</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+{% endblock %}

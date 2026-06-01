@@ -1,0 +1,86 @@
+{% extends 'caCode/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container fade-in">
+  <!-- Hero Section -->
+  <section class="grid-cols-2" style="align-items: center; gap: 4rem;">
+    <div>
+      <span class="badge badge-success mb-3">Innovation to family friendly TLS Certifications</span>
+      <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem; letter-spacing: -0.02em;">Secure Your Website with <span class="text-gradient">Trusted SSL</span></h1>
+      <p style="font-size: 1.15rem; color: var(--text-muted); margin-bottom: 2.5rem;">Get industry-leading SSL certificates that protect your website and build customer trust. Fast, reliable, and affordable solutions for businesses of all sizes.</p>
+
+      <div class="glass-card mb-4">
+        <h3 class="mb-2">Ready for your Certification?</h3>
+        <div>
+          <label class="form-label" for="domain">Enter your domain name:</label>
+          <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+            <input class="form-control" id="domain" type="text" placeholder="www.yourwebsite.com" />
+            <button class="btn btn-primary">Next Step</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+        <div class="glass-card" style="padding: 1rem; text-align: center; font-weight: 500; font-size: 0.9rem;">✓ Trusted by Authorities</div>
+        <div class="glass-card" style="padding: 1rem; text-align: center; font-weight: 500; font-size: 0.9rem;">⏱ Auto Renewal</div>
+        <div class="glass-card" style="padding: 1rem; text-align: center; font-weight: 500; font-size: 0.9rem;">🛡 Free to Use</div>
+        <div class="glass-card" style="padding: 1rem; text-align: center; font-weight: 500; font-size: 0.9rem;">⚡ Easy, Fast & Secure</div>
+      </div>
+    </div>
+
+    <!-- Stats Right Side -->
+    <div class="grid-cols-2" style="gap: 1.5rem;">
+      <div class="glass-card text-center">
+        <div class="text-gradient" style="font-size:3rem; font-weight: 700; font-family: var(--font-heading);">99.9%</div>
+        <div style="font-weight: 500; margin-top: 0.5rem; color: var(--text-muted);">Uptime Guarantee</div>
+      </div>
+      <div class="glass-card text-center">
+        <div class="text-gradient" style="font-size:3rem; font-weight: 700; font-family: var(--font-heading);">24/7</div>
+        <div style="font-weight: 500; margin-top: 0.5rem; color: var(--text-muted);">Expert Support</div>
+      </div>
+      <div class="glass-card text-center">
+        <div class="text-gradient" style="font-size:3rem; font-weight: 700; font-family: var(--font-heading);">2M+</div>
+        <div style="font-weight: 500; margin-top: 0.5rem; color: var(--text-muted);">Websites Protected</div>
+      </div>
+      <div class="glass-card text-center">
+        <div class="text-gradient" style="font-size:3rem; font-weight: 700; font-family: var(--font-heading);">256-bit</div>
+        <div style="font-weight: 500; margin-top: 0.5rem; color: var(--text-muted);">Encryption</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Cards -->
+  <section class="mt-4">
+    <div class="text-center mb-4">
+      <h2 style="font-size: 2.5rem;">Complete SSL Certificate Solutions</h2>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 1rem auto;">From domain validation to extended validation certificates, we have the right solution for your business needs.</p>
+    </div>
+    
+    <div class="grid-cols-3">
+      <div class="glass-card text-center">
+        <h3 class="mb-2">Domain Validation</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Perfect for personal websites and blogs. Quick validation process with basic encryption.</p>
+        <button class="btn btn-outline btn-block">Learn More →</button>
+      </div>
+      <div class="glass-card text-center">
+        <h3 class="mb-2">Organization Validation</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Ideal for business websites. Enhanced validation with company verification.</p>
+        <button class="btn btn-outline btn-block">Learn More →</button>
+      </div>
+      <div class="glass-card text-center">
+        <h3 class="mb-2">Extended Validation</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Maximum trust for e-commerce and financial sites. Highest level of authentication.</p>
+        <button class="btn btn-outline btn-block">Learn More →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="text-center mt-4 glass-card" style="margin-top: 4rem;">
+    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Ready to Secure Your Website?</h2>
+    <p style="color: var(--text-muted); margin-bottom: 2.5rem; font-size: 1.1rem;">Join millions of website owners who trust Sky's CA for their security needs.</p>
+    <a href="{% url 'signup' %}" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1.1rem;">Get Started Now</a>
+  </section>
+</div>
+{% endblock %}

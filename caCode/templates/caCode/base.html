@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Sky's CA - Secure Your Website{% endblock %}</title>
+  
+  <!-- Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Global CSS Design System -->
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  <!-- Global Header -->
+  <header class="navbar">
+    <div class="container navbar-container">
+      <a href="{% url 'homepage' %}" class="brand">
+        <img src="{% static 'img/logo.png' %}" alt="Sky's CA Logo" class="brand-logo" style="height:40px;">
+        <span class="brand-text">Sky's CA</span>
+      </a>
+      
+      <nav class="nav-links">
+        <a href="{% url 'certificates' %}">Certificates</a>
+        <a href="{% url 'support' %}">Support</a>
+        <a href="{% url 'about' %}">About</a>
+        
+        {% if user.is_authenticated %}
+          <a href="{% url 'dashboard' %}" class="btn btn-outline">Dashboard</a>
+          <!-- Optional: Add a real logout route if you have one, falling back to just showing logged in state for now -->
+          <span class="auth-greeting">Hi, {{ user.username }}</span>
+        {% else %}
+          <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  <!-- Dynamic Content -->
+  <main class="main-content">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <ul>
+          <li><a href="#">SSL Certificates</a></li>
+          <li><a href="#">Wildcard SSL</a></li>
+          <li><a href="#">Multi-Domain SSL</a></li>
+          <li><a href="#">Code Signing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="{% url 'support' %}">Help Center</a></li>
+          <li><a href="{% url 'installation_guides' %}">Installation Guides</a></li>
+          <li><a href="#">Contact Support</a></li>
+          <li><a href="#">Status Page</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="{% url 'about' %}">About Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Sky's CA. All rights reserved. Secure your digital future.</p>
+    </div>
+  </footer>
+
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

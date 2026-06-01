@@ -1,0 +1,87 @@
+{% extends 'caCode/base.html' %}
+{% load static %}
+{% block title %}Sign Up | Sky's CA{% endblock %}
+
+{% block content %}
+<div class="container fade-in">
+  <div class="glass-card" style="max-width: 600px; margin: 2rem auto;">
+    <h2 class="text-center mb-1">Create Your Account</h2>
+    <p class="text-center mb-4" style="color: var(--text-muted);">Join thousands of businesses securing their websites</p>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-error">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+    
+    {% if errors %}
+    <div class="alert alert-error">
+      {% for field, field_errors in errors.items %}
+        {% for error in field_errors %}
+          <p>{{ error }}</p>
+        {% endfor %}
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <div class="form-group">
+        <label for="id_username" class="form-label">Username</label>
+        {{ form.username }}
+        <div style="color: #fca5a5; font-size: 0.85rem; margin-top: 0.25rem;">{{ form.username.errors }}</div>
+      </div>
+
+      <div class="grid-cols-2" style="margin-bottom: 1.5rem; gap: 1.5rem;">
+        <div>
+          <label for="id_first_name" class="form-label">First Name</label>
+          {{ form.first_name }}
+          <div style="color: #fca5a5; font-size: 0.85rem; margin-top: 0.25rem;">{{ form.first_name.errors }}</div>
+        </div>
+        <div>
+          <label for="id_last_name" class="form-label">Last Name</label>
+          {{ form.last_name }}
+          <div style="color: #fca5a5; font-size: 0.85rem; margin-top: 0.25rem;">{{ form.last_name.errors }}</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="id_email" class="form-label">Business Email</label>
+        {{ form.email }}
+        <div style="color: #fca5a5; font-size: 0.85rem; margin-top: 0.25rem;">{{ form.email.errors }}</div>
+      </div>
+
+      <div class="grid-cols-2" style="margin-bottom: 2.5rem; gap: 1.5rem;">
+        <div>
+          <label for="id_password1" class="form-label">Password</label>
+          {{ form.password1 }}
+          <div style="color: #fca5a5; font-size: 0.85rem; margin-top: 0.25rem;">{{ form.password1.errors }}</div>
+        </div>
+        <div>
+          <label for="id_password2" class="form-label">Confirm Password</label>
+          {{ form.password2 }}
+          <div style="color: #fca5a5; font-size: 0.85rem; margin-top: 0.25rem;">{{ form.password2.errors }}</div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+    </form>
+
+    <div class="text-center mt-4" style="color: var(--text-muted);">
+      Already have an account? <a href="{% url 'login' %}" class="text-gradient" style="font-weight: 600;">Log in</a>
+    </div>
+  </div>
+</div>
+<!-- Quick script to apply .form-control to django generated fields -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('input').forEach(input => {
+      if(input.type !== 'submit' && input.type !== 'hidden' && input.type !== 'checkbox') {
+        input.classList.add('form-control');
+      }
+    });
+  });
+</script>
+{% endblock %}

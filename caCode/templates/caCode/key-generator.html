@@ -1,0 +1,102 @@
+{% extends 'caCode/base.html' %}
+{% load static %}
+{% block title %}Private Key Generator | Sky's CA{% endblock %}
+
+{% block content %}
+<style>
+  .format-tab {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .format-tab.active {
+    background: var(--accent-primary);
+    color: #000;
+    font-weight: 600;
+  }
+</style>
+
+<div class="container fade-in">
+  <div style="max-width: 800px; margin: 0 auto;">
+    <h1 class="text-center" style="font-size: 2.5rem; margin-bottom: 0.5rem;">Private Key Generator</h1>
+    <p class="text-center" style="color: var(--text-muted); margin-bottom: 3rem;">
+      Generate secure private keys for your SSL certificates with customizable parameters.
+    </p>
+
+    <div class="glass-card" style="padding: 3rem; margin-bottom: 3rem;">
+      <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text-primary);">Key Type</h3>
+      
+      <div class="grid-cols-2" style="gap: 1.5rem; margin-bottom: 2rem;">
+        <div style="background: rgba(0, 255, 136, 0.1); border: 1px solid var(--accent-primary); border-radius: 0.75rem; padding: 1.5rem; cursor: pointer;">
+          <h4 style="margin: 0 0 0.5rem 0; color: var(--accent-primary); font-size: 1.1rem;">RSA</h4>
+          <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Traditional and widely supported key type, suitable for most use cases.</p>
+        </div>
+        <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 0.75rem; padding: 1.5rem; cursor: pointer;">
+          <h4 style="margin: 0 0 0.5rem 0; color: var(--text-primary); font-size: 1.1rem;">ECC</h4>
+          <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Newer, more efficient key type with smaller key sizes and faster operations.</p>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 1.5rem;">
+        <label for="keySize" class="form-label">Key Size</label>
+        <select id="keySize" class="form-control" style="cursor: pointer;">
+          <option value="2048">2048 bits (Standard RSA)</option>
+          <option value="3072">3072 bits (Enhanced RSA)</option>
+          <option value="4096">4096 bits (Maximum RSA)</option>
+          <option value="256">256 bits (ECC)</option>
+          <option value="384">384 bits (ECC)</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 1.5rem;">
+        <label for="format" class="form-label">Key Format</label>
+        <select id="format" class="form-control" style="cursor: pointer;">
+          <option value="pem">PEM (Base64)</option>
+          <option value="der">DER (Binary)</option>
+          <option value="pkcs8">PKCS#8</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 2.5rem;">
+        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; color: var(--text-primary);">
+          <input type="checkbox" id="password" style="width: auto; margin: 0;"> Encrypt private key with password
+        </label>
+        <input type="password" id="keyPassword" class="form-control" placeholder="Enter password" style="margin-top: 1rem; display: none;">
+      </div>
+
+      <button class="btn btn-primary btn-block" style="font-size: 1.1rem; padding: 1rem;">Generate Key</button>
+
+      <div style="margin-top: 3rem; border-top: 1px solid var(--glass-border); padding-top: 2rem;">
+        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-primary);">Generated Key</h3>
+        
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+          <div class="format-tab active">Private Key</div>
+          <div class="format-tab">Public Key</div>
+        </div>
+
+        <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid var(--glass-border); border-radius: 0.5rem; padding: 1.5rem; font-family: monospace; white-space: pre-wrap; margin-bottom: 1.5rem; max-height: 300px; overflow-y: auto; color: #cbd5e1; font-size: 0.9rem;">-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDBj08GcmJ+EY+k
+...
+-----END PRIVATE KEY-----</div>
+
+        <div style="display: flex; gap: 1rem;">
+          <button class="btn btn-outline">Copy to Clipboard</button>
+          <button class="btn btn-outline">Download Key</button>
+        </div>
+      </div>
+
+      <div style="background: rgba(234, 179, 8, 0.1); border: 1px solid rgba(234, 179, 8, 0.2); border-radius: 0.5rem; padding: 1rem; color: #fef08a; font-size: 0.9rem; margin-top: 2rem;">
+        ⚠️ Important: Store your private key securely. Never share it with anyone.
+      </div>
+    </div>
+
+    <div class="text-center glass-card" style="margin-top: 4rem; padding: 3rem;">
+      <h2 style="font-size: 2rem; margin-bottom: 1rem;">Need Help?</h2>
+      <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem;">Our support team can help you generate and manage your keys</p>
+      <a href="{% url 'support' %}" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1.1rem;">Contact Support</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
